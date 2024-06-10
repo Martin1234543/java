@@ -1,0 +1,16 @@
+FROM python:3.9
+
+# Install the wget package
+RUN apt-get update && apt-get install -y wget
+
+# Set the TESTSCORE environment variable
+ENV TESTSCORE 1234
+
+# Copy the source code into the container
+COPY src /app
+
+# Install the dependencies
+RUN pip install -r requirements.txt
+
+# Run the application
+CMD ["python", "app.py"]
