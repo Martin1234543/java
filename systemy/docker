@@ -1,0 +1,26 @@
+https://docs.docker.com/get-started/02_our_app/
+https://docs.docker.com/compose/gettingstarted/
+https://docs.docker.com/compose/networking/
+https://forums.docker.com/t/static-ip-on-docker-containers/110412/5
+Krzysztof's code :
+  # syntax=docker/dockerfile:1
+FROM python:3.9
+ 
+ENV PYTHONUNBUFFERED=1
+WORKDIR /code
+ 
+RUN pip install Django
+RUN pip install djangorestframework
+ 
+EXPOSE 8000
+ 
+CMD ["python", "-m", "http.server"]
+
+  services:
+  web:
+    build: .
+    depends_on:
+      - db
+  db:
+    image: postgres
+  
