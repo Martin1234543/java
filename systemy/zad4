@@ -1,0 +1,26 @@
+
+version: '3.9'
+
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  db:
+    image: "postgres:13.11"
+    networks:
+      app_net:
+    	 ipv4_address: 172.16.238.10
+	 ipv6_address: 2001:3984:3989::10
+
+networks:
+  app-net:
+    ipam:
+    	driver: default
+	config:
+          - subnet: "172.16.238.0/24"
+	  - subnet: "2001:3984:3989::/64"
