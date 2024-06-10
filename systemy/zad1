@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <algorithm>
+#include<ctime>
+#include<sys/wait.h>
+#include<unistd.h>
+int* fun(){
+	int arr[10];
+	for(int i=0;i<10;i++){
+		arr[i]=rand()%101;
+	}
+	std::sort(std::begin(arr), std::end(arr));
+	for(int i =0;i<10;i++){
+	printf("%d ", arr[i]);
+	}
+	return arr;
+}
+int main(){
+	pid_t pid = fork();
+	if(pid==0){
+	fun();
+	}else if(pid==1){
+	wait(NULL);
+	}
+	
+        return 0;
+}
