@@ -1,0 +1,71 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Server {
+
+    public static void main(String[] args) {
+        try {
+            // Utwórz gniazdo serwera na porcie 1234
+            ServerSocket serverSocket = new ServerSocket(1234);
+
+            // Oczekuj na połączenie klienta
+            System.out.println("Oczekiwanie na połączenie klienta...");
+            Socket clientSocket = serverSocket.accept();
+
+            // Utwórz strumień wejściowy do odczytu danych od klienta
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+            // Odczytaj dane od klienta
+            String message = in.readLine();
+
+            // Wyświetl otrzymaną wiadomość
+            System.out.println("Otrzymana wiadomość od klienta: " + message);
+
+            // Zamknij strumień wejściowy i gniazdo klienta
+            in.close();
+            clientSocket.close();
+
+            // Zamknij gniazdo serwera
+            serverSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.Socket;
+
+public class Client {
+
+    public static void main(String[] args) {
+        try {
+            // Utwórz gniazdo klienta i połącz się z serwerem na porcie 1234
+            Socket clientSocket = new Socket("localhost", 1234);
+
+            // Utwórz strumień wyjściowy do zapisu danych do serwera
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+
+            // Wyślij wiadomość do serwera
+            out.write("Cześć, świecie!");
+            out.newLine();
+            out.flush();
+
+            // Zamknij strumień wyjściowy i gniazdo klienta
+            out.close();
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
