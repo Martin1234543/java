@@ -1,4 +1,6 @@
 Czinga - https://github.com/Kwi4t3k/programowanie_laby_poniedzia-ek 
 
 
-Jakub - github.com/JakubTraczF/
+Jakub - https://github.com/JakubTraczF/
+
+UMCS PRO - https://github.com/umcspro/
